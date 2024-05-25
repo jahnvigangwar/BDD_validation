@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        AWS_CREDENTIALS_ID = 'AWS_ACCESS_KEY_ID'
+        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
 
     stages {
@@ -32,28 +33,19 @@ pipeline {
         }
         
         stage('Terraform Apply') {
-            steps {
-                withAWS(credentials: "${AWS_CREDENTIALS_ID}", region: 'us-east-1') 
-                {
-                    sh 'pwd; cd terraformFiles/ ;  terraform apply -auto-approve'
-                }
-            }
+            sh 'pwd; cd terraformFiles/ ;  terraform apply -auto-approve'
         }
         
         stage('Run Tests') {
             steps {
-                withAWS(credentials: "${AWS_CREDENTIALS_ID}", region: 'us-east-1') {
-                    sh 'pip install -r requirements.txt' // Ensure all dependencies are installed
-                    sh 'behave'
-                }
+                sh 'pip install -r requirements.txt' // Ensure all dependencies are installed
+                sh 'behave'
             }
         }
 
         stage('Terraform Destroy') {
             steps {
-                withAWS(credentials: "${AWS_CREDENTIALS_ID}", region: 'us-east-1') {
-                    sh 'pwd; cd terraformFiles/; terraform destroy -auto-approve'
-                }
+                sh 'pwd; cd terraformFiles/; terraform destroy -auto-approve'
             }
         }
     }
