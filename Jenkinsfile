@@ -42,8 +42,8 @@ pipeline {
             steps {
                 // sh 'pipx install -r requirements.txt' // Ensure all dependencies are installed
                 sh 'pipx install behave'
-                sh 'pipx install boto3'
-                sh 'pipx install python-terraform'
+                sh 'pip install boto3'
+                sh 'pip install python-terraform'
                 sh 'behave'
             }
         }
