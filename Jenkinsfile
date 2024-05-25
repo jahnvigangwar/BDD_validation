@@ -33,7 +33,9 @@ pipeline {
         }
         
         stage('Terraform Apply') {
-            sh 'pwd; cd terraformFiles/ ;  terraform apply -auto-approve'
+            steps {
+                sh 'pwd; cd terraformFiles/ ;  terraform apply -auto-approve'
+            }
         }
         
         stage('Run Tests') {
