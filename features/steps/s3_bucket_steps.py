@@ -27,7 +27,7 @@ def step_impl(context):
 @when('I apply the Terraform configuration')
 def step_impl(context):
     # print("present working dir: ", os.getcwd())
-    os.chdir('/Users/jahnvi/Projects/BDD_validation/terraform')
+    os.chdir('/Users/jahnvi/Projects/BDD_validation/terraformFiles')
     return_code, stdout, stderr = terraform.apply(skip_plan=True, auto_approve=True)
     assert return_code == 0
     time.sleep(10)  # Wait for AWS to propagate changes
