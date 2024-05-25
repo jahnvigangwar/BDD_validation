@@ -15,7 +15,7 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 sh 'pwd'
-                sh 'cd terraform'
+                sh 'cd /Users/jahnvi/.jenkins/workspace/BDD_validation_Pipeline@script/829e7402c981cfb1ce9c896c28ca3f73197eb1da8fa92b20cd3ddec253da08cc/terraform'
                 sh 'pwd'
                 sh '/usr/local/bin/terraform init'
                 
@@ -25,7 +25,7 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 sh 'pwd'
-                sh 'cd terraform'
+                sh 'cd /Users/jahnvi/.jenkins/workspace/BDD_validation_Pipeline@script/829e7402c981cfb1ce9c896c28ca3f73197eb1da8fa92b20cd3ddec253da08cc/terraform'
                 sh 'pwd'
                 withAWS(credentials: "${AWS_CREDENTIALS_ID}", region: 'us-east-1') {
                     sh '/usr/local/bin/terraform apply -auto-approve'
