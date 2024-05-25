@@ -40,7 +40,7 @@ pipeline {
         
         stage('Run Tests') {
             steps {
-                sh 'pip install -r requirements.txt' // Ensure all dependencies are installed
+                sh 'pipx install -r requirements.txt' // Ensure all dependencies are installed
                 sh 'behave'
             }
         }
