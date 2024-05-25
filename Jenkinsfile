@@ -15,13 +15,13 @@ pipeline {
 
         stage('Terraform Init') {
             steps {
-                sh 'pwd;cd terraform/ ; terraform init'
+                sh 'pwd;cd terraformFiles/ ; terraform init'
             }
         }
         
         stage('Terraform Apply') {
             steps {
-                sh 'pwd;cd terraform/ ; terraform apply -auto-approve'
+                sh 'pwd;cd terraformFiles/ ; terraform apply -auto-approve'
             }
         }
 
