@@ -19,11 +19,11 @@ pipeline {
             }
         }
         
-        stage('Terraform Apply') {
-            steps {
-                sh 'pwd;cd terraformFiles/ ; terraform apply -auto-approve'
-            }
-        }
+        // stage('Terraform Apply') {
+        //     steps {
+        //         sh 'pwd;cd terraformFiles/ ; terraform apply -auto-approve'
+        //     }
+        // }
 
         // stage('Terraform Init') {
         //     steps {
@@ -31,14 +31,14 @@ pipeline {
         //     }
         // }
         
-        // stage('Terraform Apply') {
-        //     steps {
-        //         sh 'pwd; cd terraform/ ; pwd;  /usr/local/bin/terraform apply -auto-approve'
-        //     //     withAWS(credentials: "${AWS_CREDENTIALS_ID}", region: 'us-east-1') {
-        //     //         sh '/usr/local/bin/terraform apply -auto-approve'
-        //     //     }
-        //     }
-        // }
+        stage('Terraform Apply') {
+            steps {
+                withAWS(credentials: "${AWS_CREDENTIALS_ID}", region: 'us-east-1') 
+                {
+                    sh 'pwd; cd terraformFiles/ ; pwd;  /usr/local/bin/terraform apply -auto-approve'
+                }
+            }
+        }
         
         stage('Run Tests') {
             steps {
