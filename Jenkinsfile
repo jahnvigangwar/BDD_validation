@@ -16,7 +16,7 @@ pipeline {
         stage('Setup Python Environment') {
             steps {
                 sh 'python3 -m venv venv'
-                sh  'source .venv/bin/activate' 
+                sh  '. venv/bin/activate' 
                 sh 'pip install -r requirements.txt'
             }
         }
@@ -52,7 +52,7 @@ pipeline {
                 // sh 'pip install boto3'
                 // sh 'pip install python-terraform'
                 // sh 'behave'
-                sh 'source venv/bin/activate && behave'
+                sh 'source . venv/bin/activate && behave'
             }
         }
 
