@@ -29,10 +29,10 @@ def step_impl(context):
 @when('I apply the Terraform configuration')
 def step_impl(context):
     # print("present working dir: ", os.getcwd())
-    # os.chdir('/Users/jahnvi/Projects/BDD_validation/terraformFiles')
+    os.chdir('terraformFiles')
 
     # Change to the desired directory using a shell command
-    subprocess.call(f"cd terraformFiles", shell=True)
+    # subprocess.call(f"cd terraformFiles", shell=True)
 
 
     return_code, stdout, stderr = terraform.apply(skip_plan=True, auto_approve=True)
