@@ -18,24 +18,24 @@ pipeline {
                 sh 'pwd;cd terraformFiles/ ; terraform init'
             }
         }
-        
-        // stage('Terraform Apply') {
-        //     steps {
-        //         sh 'pwd;cd terraformFiles/ ; terraform apply -auto-approve'
-        //     }
-        // }
 
-        // stage('Terraform Init') {
-        //     steps {
-        //         sh '/usr/local/bin/terraform init'
-        //     }
-        // }
+        stage('Terraform Validate') {
+            steps {
+                sh 'pwd;cd terraformFiles/ ; terraform validate'
+            }
+        }
+        
+        stage('Terraform Plan') {
+            steps {
+                sh 'pwd;cd terraformFiles/ ; terraform plan'
+            }
+        }
         
         stage('Terraform Apply') {
             steps {
                 withAWS(credentials: "${AWS_CREDENTIALS_ID}", region: 'us-east-1') 
                 {
-                    sh 'pwd; cd terraformFiles/ ; pwd;  terraform apply -auto-approve'
+                    sh 'pwd; cd terraformFiles/ ;  terraform apply -auto-approve'
                 }
             }
         }
