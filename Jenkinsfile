@@ -35,7 +35,7 @@ pipeline {
             steps {
                 withAWS(credentials: "${AWS_CREDENTIALS_ID}", region: 'us-east-1') 
                 {
-                    sh 'pwd; cd terraformFiles/ ; pwd;  /usr/local/bin/terraform apply -auto-approve'
+                    sh 'pwd; cd terraformFiles/ ; pwd;  terraform apply -auto-approve'
                 }
             }
         }
@@ -52,7 +52,7 @@ pipeline {
         stage('Terraform Destroy') {
             steps {
                 withAWS(credentials: "${AWS_CREDENTIALS_ID}", region: 'us-east-1') {
-                    sh '/usr/local/bin/terraform destroy -auto-approve'
+                    sh 'pwd; cd terraformFiles/; terraform destroy -auto-approve'
                 }
             }
         }
