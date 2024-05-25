@@ -5,6 +5,8 @@ import time
 from python_terraform import Terraform
 from behave import given, when, then
 from botocore.exceptions import ClientError
+import subprocess
+
 
 terraform = Terraform()
 
@@ -28,6 +30,11 @@ def step_impl(context):
 def step_impl(context):
     # print("present working dir: ", os.getcwd())
     os.chdir('/Users/jahnvi/Projects/BDD_validation/terraformFiles')
+
+    # Change to the desired directory using a shell command
+    subprocess.call(f"cd terraformFiles", shell=True)
+
+
     return_code, stdout, stderr = terraform.apply(skip_plan=True, auto_approve=True)
     assert return_code == 0
     time.sleep(10)  # Wait for AWS to propagate changes
