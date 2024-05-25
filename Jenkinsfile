@@ -13,14 +13,25 @@ pipeline {
             }
         }
 
+        // stage('Setup Python Environment') {
+        //     steps {
+        //         sh 'python3 -m venv venv'
+        //         sh  '. venv/bin/activate' 
+        //         // sh 'pip install -r requirements.txt'
+        //         sh 'pip install behave'
+        //         sh 'pip install boto3'
+        //         sh 'pip install python-terraform'
+        //     }
+        // }
         stage('Setup Python Environment') {
             steps {
-                sh 'python3 -m venv venv'
-                sh  '. venv/bin/activate' 
-                // sh 'pip install -r requirements.txt'
-                sh 'pip install behave'
-                sh 'pip install boto3'
-                sh 'pip install python-terraform'
+                sh '''
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip install behave
+                    pip install boto3
+                    pip install python-terraform
+                '''
             }
         }
 
