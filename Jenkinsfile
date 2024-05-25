@@ -14,8 +14,10 @@ pipeline {
         
         stage('Terraform Init') {
             steps {
-                sh '/usr/local/bin/terraform init'
                 sh 'pwd'
+                sh 'cd terraform'
+                sh '/usr/local/bin/terraform init'
+                
             }
         }
         
