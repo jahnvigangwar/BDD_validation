@@ -40,7 +40,10 @@ pipeline {
         
         stage('Run Tests') {
             steps {
-                sh 'pipx install -r requirements.txt' // Ensure all dependencies are installed
+                // sh 'pipx install -r requirements.txt' // Ensure all dependencies are installed
+                sh 'pipx install behave'
+                sh 'pipx install boto3'
+                sh 'pipx install python-terraform'
                 sh 'behave'
             }
         }
