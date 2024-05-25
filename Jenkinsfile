@@ -15,11 +15,13 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 sh '/usr/local/bin/terraform init'
+                sh 'pwd'
             }
         }
         
         stage('Terraform Apply') {
             steps {
+                sh 'pwd'
                 withAWS(credentials: "${AWS_CREDENTIALS_ID}", region: 'us-east-1') {
                     sh '/usr/local/bin/terraform apply -auto-approve'
                 }
