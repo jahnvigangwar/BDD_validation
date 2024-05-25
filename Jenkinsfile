@@ -13,6 +13,12 @@ pipeline {
             }
         }
 
+        stage('Setup Python Environment') {
+            steps {
+                sh 'python3 -m venv venv'
+                sh 'source venv/bin/activate && pip install -r requirements.txt'
+            }
+        }
 
         stage('Terraform Init') {
             steps {
@@ -40,11 +46,12 @@ pipeline {
         
         stage('Run Tests') {
             steps {
-                // sh 'pipx install -r requirements.txt' // Ensure all dependencies are installed
-                sh 'pipx install behave'
-                sh 'pip install boto3'
-                sh 'pip install python-terraform'
-                sh 'behave'
+                // // sh 'pipx install -r requirements.txt' // Ensure all dependencies are installed
+                // sh 'pipx install behave'
+                // sh 'pip install boto3'
+                // sh 'pip install python-terraform'
+                // sh 'behave'
+                sh 'source venv/bin/activate && behave'
             }
         }
 
