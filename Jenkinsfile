@@ -37,25 +37,49 @@ pipeline {
 
         stage('Terraform Init') {
             steps {
-                sh 'pwd;cd terraformFiles/ ; terraform init'
+                // sh 'pwd;cd terraformFiles/ ; terraform init'
+                sh '''
+                        . venv/bin/activate
+                        pwd
+                        cd terraformFiles/ 
+                        terraform init
+                '''
             }
         }
 
         stage('Terraform Validate') {
             steps {
-                sh 'pwd;cd terraformFiles/ ; terraform validate'
+                // sh 'pwd;cd terraformFiles/ ; terraform validate'
+                sh '''
+                        . venv/bin/activate
+                        pwd
+                        cd terraformFiles/ 
+                        terraform validate
+                '''
             }
         }
         
         stage('Terraform Plan') {
             steps {
-                sh 'pwd;cd terraformFiles/ ; terraform plan'
+                // sh 'pwd;cd terraformFiles/ ; terraform plan'
+                sh '''
+                        . venv/bin/activate
+                        pwd
+                        cd terraformFiles/ 
+                        terraform plan
+                '''
             }
         }
         
         stage('Terraform Apply') {
             steps {
-                sh 'pwd; cd terraformFiles/ ;  terraform apply -auto-approve'
+                // sh 'pwd; cd terraformFiles/ ;  terraform apply -auto-approve'
+                sh '''
+                        . venv/bin/activate
+                        pwd
+                        cd terraformFiles/ 
+                        terraform apply -auto-approve
+                '''
             }
         }
         
@@ -66,13 +90,24 @@ pipeline {
                 // sh 'pip install boto3'
                 // sh 'pip install python-terraform'
                 // sh 'behave'
-                sh 'source . venv/bin/activate && behave'
+                
+                // sh 'source . venv/bin/activate && behave'
+                sh '''
+                        . venv/bin/activate
+                        behave
+                '''
             }
         }
 
         stage('Terraform Destroy') {
             steps {
-                sh 'pwd; cd terraformFiles/; terraform destroy -auto-approve'
+                // sh 'pwd; cd terraformFiles/; terraform destroy -auto-approve'
+                sh '''
+                        . venv/bin/activate
+                        pwd
+                        cd terraformFiles/ 
+                        terraform destroy -auto-approve
+                '''
             }
         }
     }
